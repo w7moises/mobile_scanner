@@ -5,10 +5,7 @@ import 'package:qr_scanner_app/screens/result_screen.dart';
 import 'package:qr_scanner_overlay/qr_scanner_overlay.dart';
 
 class QRScanner extends StatefulWidget {
-  const QRScanner(
-      {super.key,
-      required bool isFlashOn,
-      required MobileScannerController controller});
+  const QRScanner({super.key, required bool isFlashOn});
 
   @override
   State<QRScanner> createState() => _QRScannerState();
@@ -16,7 +13,15 @@ class QRScanner extends StatefulWidget {
 
 class _QRScannerState extends State<QRScanner> {
   bool isScanCompleted = false;
-  bool isFlashOn = false;
+  MobileScannerController controller = MobileScannerController(detectionSpeed: DetectionSpeed.normal,detectionTimeoutMs: 1500);
+  
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.toggleTorch();
+    });
+    super.initState();
+  }
 
   void closeScreen() {
     isScanCompleted = false;

@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qr_scanner_app/screens/qr_scanner.dart';
 
 int _selectedIndex = 0;
 bool isFlashOn = false;
-MobileScannerController controller = MobileScannerController();
 const TextStyle optionStyle =
     TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
 final List<Widget> _widgetOptions = <Widget>[
   const Text('Home', style: optionStyle),
-  QRScanner(isFlashOn: isFlashOn, controller: controller),
+  QRScanner(isFlashOn: isFlashOn),
   const Text('Settings', style: optionStyle),
 ];
 
@@ -39,7 +37,6 @@ class _HomeState extends State<Home> {
             onPressed: () {
               setState(() {
                 isFlashOn = !isFlashOn;
-                controller.toggleTorch();
               });
             },
           ),
